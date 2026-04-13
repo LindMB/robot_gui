@@ -1,9 +1,10 @@
+#include "robot_gui/teleoperation_buttons_area_class.h"
 #define CVUI_IMPLEMENTATION
 #include "robot_gui/main_window_class.h"
 #include <ros/ros.h>
 
 CVUIROSMainWindow::CVUIROSMainWindow(ros::NodeHandle *nh)
-    : general_info_area(nh) {
+    : general_info_area(nh), teleop_buttons_area(nh) {
 
   // Init a OpenCV window and tell cvui to use it.
   cv::namedWindow(this->WINDOW_NAME);
@@ -12,7 +13,7 @@ CVUIROSMainWindow::CVUIROSMainWindow(ros::NodeHandle *nh)
 
 void CVUIROSMainWindow::run() {
 
-  // Initialize main window size (Height: 300 pixels, Width: 500 pixels)
+  // Initialize main window size (Height: 800 pixels, Width: 500 pixels)
   cv::Mat frame = cv::Mat(this->height, this->width, CV_8UC3);
 
   // Fill the frame with a grey color
@@ -22,6 +23,8 @@ void CVUIROSMainWindow::run() {
 
     // Draw the general info area
     this->general_info_area.draw(frame, this->width);
+    // Draw the teleoperation buttons area
+    this->teleop_buttons_area.draw(frame, this->width);
 
     // Update cvui internal stuff
     cvui::update();

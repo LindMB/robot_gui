@@ -16,7 +16,6 @@ public:
 
 private:
   ros::Subscriber sub_;
-  std::string topic_name;
 
   std::string data_field_01;
   std::string data_field_02;

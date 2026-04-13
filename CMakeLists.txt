@@ -133,6 +133,9 @@ add_library(main_window
 add_library(general_info_area
 	src/general_info_area_class.cpp
 )
+add_library(teleoperation_buttons_area
+	src/teleoperation_buttons_area_class.cpp
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -158,6 +161,7 @@ add_executable(${PROJECT_NAME}_node src/robot_gui_node.cpp)
 target_link_libraries(${PROJECT_NAME}_node
   main_window
   general_info_area
+  teleoperation_buttons_area
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )
