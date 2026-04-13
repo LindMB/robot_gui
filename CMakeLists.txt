@@ -16,6 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_srvs
 )
 
+find_package(OpenCV 4 REQUIRED)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -125,6 +127,9 @@ include_directories(
 )
 
 ## Declare a C++ library
+add_library(main_window
+	src/main_window_class.cpp
+)
 add_library(general_info_area
 	src/general_info_area_class.cpp
 )
@@ -151,9 +156,10 @@ add_executable(${PROJECT_NAME}_node src/robot_gui_node.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
+  main_window
   general_info_area
   ${catkin_LIBRARIES}
-  ${OpenCV_INCLUDE_DIRS}
+  ${OpenCV_LIBRARIES}
 )
 
 #############
