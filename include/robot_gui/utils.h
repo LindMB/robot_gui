@@ -2,5 +2,5 @@
 
 class Utils {
 public:
-  static std::string double_to_string_2_deci(double val);
+  static std::string double_to_string_n_deci(double val, int nb_deci);
 };

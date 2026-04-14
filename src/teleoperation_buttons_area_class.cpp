@@ -85,9 +85,10 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
   cvui::window(frame, 10, 420, (width / 2 - 20), 50, "Linear Velocity");
 
   // Show linear velocity inside the window.
-  cvui::printf(frame, 30, 445, 0.6, 0xff0000,
-               (Utils::double_to_string_2_deci(this->current_linear_x) + " m/s")
-                   .c_str());
+  cvui::printf(
+      frame, 30, 445, 0.6, 0xff0000,
+      (Utils::double_to_string_n_deci(this->current_linear_x, 2) + " m/s")
+          .c_str());
 
   // Angular Velocity Window
   cvui::window(frame, (width / 2), 420, (width / 2 - 20), 50,
@@ -96,6 +97,6 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
   // Show angular velocity inside the window.
   cvui::printf(
       frame, (width / 2 + 20), 445, 0.6, 0xff0000,
-      (Utils::double_to_string_2_deci(this->current_angular_z) + " rad/s")
+      (Utils::double_to_string_n_deci(this->current_angular_z, 2) + " rad/s")
           .c_str());
 }

@@ -14,9 +14,9 @@ CVUIROSRobotPositionArea::CVUIROSRobotPositionArea(ros::NodeHandle *nh) {
 void CVUIROSRobotPositionArea::odom_callback(
     const nav_msgs::Odometry::ConstPtr &msg) {
 
-  this->x_pos = Utils::double_to_string_2_deci(msg->pose.pose.position.x);
-  this->y_pos = Utils::double_to_string_2_deci(msg->pose.pose.position.y);
-  this->z_pos = Utils::double_to_string_2_deci(msg->pose.pose.position.z);
+  this->x_pos = Utils::double_to_string_n_deci(msg->pose.pose.position.x, 2);
+  this->y_pos = Utils::double_to_string_n_deci(msg->pose.pose.position.y, 2);
+  this->z_pos = Utils::double_to_string_n_deci(msg->pose.pose.position.z, 2);
 }
 
 void CVUIROSRobotPositionArea::draw(cv::Mat &frame, const int &width) {
