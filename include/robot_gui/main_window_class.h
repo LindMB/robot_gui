@@ -1,6 +1,10 @@
 #pragma once
 
+#include "robot_gui/cvui.h"
+#include <opencv2/opencv.hpp>
+
 #include "robot_gui/general_info_area_class.h"
+#include "robot_gui/robot_position_area_class.h"
 #include "robot_gui/teleoperation_buttons_area_class.h"
 #include <ros/ros.h>
 
@@ -19,4 +23,5 @@ private:
 
   CVUIROSGeneralInfoArea general_info_area;
   CVUIROSTeleopButtonsArea teleop_buttons_area;
+  CVUIROSRobotPositionArea robot_position_area;
 };

@@ -1,8 +1,9 @@
 #pragma once
 
 #include "robot_gui/cvui.h"
-#include <geometry_msgs/Twist.h>
 #include <opencv2/opencv.hpp>
+
+#include <geometry_msgs/Twist.h>
 #include <ros/ros.h>
 
 class CVUIROSTeleopButtonsArea {

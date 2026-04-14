@@ -1,5 +1,4 @@
 #include "robot_gui/teleoperation_buttons_area_class.h"
-#include <ros/ros.h>
 
 CVUIROSTeleopButtonsArea::CVUIROSTeleopButtonsArea(ros::NodeHandle *nh) {
 

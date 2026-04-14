@@ -127,6 +127,9 @@ include_directories(
 )
 
 ## Declare a C++ library
+add_library(cvui
+	src/cvui.cpp
+)
 add_library(main_window
 	src/main_window_class.cpp
 )
@@ -135,6 +138,9 @@ add_library(general_info_area
 )
 add_library(teleoperation_buttons_area
 	src/teleoperation_buttons_area_class.cpp
+)
+add_library(robot_position_area
+	src/robot_position_area_class.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -158,10 +164,36 @@ add_executable(${PROJECT_NAME}_node src/robot_gui_node.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(main_window
+	cvui
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(general_info_area
+	cvui
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(teleoperation_buttons_area
+	cvui
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
+target_link_libraries(robot_position_area
+	cvui
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
 target_link_libraries(${PROJECT_NAME}_node
+	cvui
   main_window
   general_info_area
   teleoperation_buttons_area
+  robot_position_area
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )

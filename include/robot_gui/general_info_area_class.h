@@ -1,8 +1,9 @@
 #pragma once
 
 #include "robot_gui/cvui.h"
-#include "robotinfo_msgs/RobotInfo10Fields.h"
 #include <opencv2/opencv.hpp>
+
+#include "robotinfo_msgs/RobotInfo10Fields.h"
 #include <ros/ros.h>
 
 class CVUIROSGeneralInfoArea {
