@@ -15,4 +15,8 @@ public:
 
 private:
   ros::Publisher pub_;
+  const double linear_x_step = 0.2;
+  const double angular_z_step = 0.2;
+  double current_linear_x;
+  double current_angular_z;
 };
