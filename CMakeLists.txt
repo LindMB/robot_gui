@@ -130,6 +130,9 @@ include_directories(
 add_library(cvui
 	src/cvui.cpp
 )
+add_library(utils
+	src/utils.cpp
+)
 add_library(main_window
 	src/main_window_class.cpp
 )
@@ -178,18 +181,19 @@ target_link_libraries(general_info_area
 
 target_link_libraries(teleoperation_buttons_area
 	cvui
+	utils
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )
 
 target_link_libraries(robot_position_area
 	cvui
+	utils
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )
 
 target_link_libraries(${PROJECT_NAME}_node
-	cvui
   main_window
   general_info_area
   teleoperation_buttons_area

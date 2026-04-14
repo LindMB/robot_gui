@@ -1,6 +1,5 @@
 #include "robot_gui/robot_position_area_class.h"
-#include <iomanip>
-#include <sstream>
+#include "robot_gui/utils.h"
 
 CVUIROSRobotPositionArea::CVUIROSRobotPositionArea(ros::NodeHandle *nh) {
 
@@ -15,35 +14,9 @@ CVUIROSRobotPositionArea::CVUIROSRobotPositionArea(ros::NodeHandle *nh) {
 void CVUIROSRobotPositionArea::odom_callback(
     const nav_msgs::Odometry::ConstPtr &msg) {
 
-  std::ostringstream oss;
-
-  oss << std::fixed << std::setprecision(2) << msg->pose.pose.position.x;
-  this->x_pos = oss.str();
-
-  // Reset
-  oss.str("");
-  oss.clear();
-
-  oss << std::fixed << std::setprecision(2) << msg->pose.pose.position.y;
-  this->y_pos = oss.str();
-
-  // Reset
-  oss.str("");
-  oss.clear();
-
-  oss << std::fixed << std::setprecision(2) << msg->pose.pose.position.z;
-  this->z_pos = oss.str();
-
-  // Reset
-  oss.str("");
-  oss.clear();
-
-  /*this->x_pos =
-      (std::to_string(msg->pose.pose.position.x).substr(0, 4)).c_str();
-  this->y_pos =
-      (std::to_string(msg->pose.pose.position.y).substr(0, 4)).c_str();
-  this->z_pos =
-      (std::to_string(msg->pose.pose.position.z).substr(0, 4)).c_str();*/
+  this->x_pos = Utils::double_to_string_2_deci(msg->pose.pose.position.x);
+  this->y_pos = Utils::double_to_string_2_deci(msg->pose.pose.position.y);
+  this->z_pos = Utils::double_to_string_2_deci(msg->pose.pose.position.z);
 }
 
 void CVUIROSRobotPositionArea::draw(cv::Mat &frame, const int &width) {
