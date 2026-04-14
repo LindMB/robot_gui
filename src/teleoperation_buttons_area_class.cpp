@@ -21,7 +21,7 @@ void CVUIROSTeleopButtonsArea::cmd_vel_callback(
 void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
 
   // cvui::button(frame, x, y, largeur, hauteur, "Texte")
-  if (cvui::button(frame, 10, (320 + 10), ((width / 3) - 20), 100, "Left")) {
+  if (cvui::button(frame, 10, (260 + 20), ((width / 3) - 20), 50, "Left")) {
     ROS_INFO("Button Left clicked...");
 
     geometry_msgs::Twist msg;
@@ -32,7 +32,7 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     this->pub_.publish(msg);
   }
 
-  if (cvui::button(frame, ((width / 3) + 10), 210, ((width / 3) - 20), 100,
+  if (cvui::button(frame, ((width / 3) + 10), 210, ((width / 3) - 20), 50,
                    "Forward")) {
     ROS_INFO("Button Forward clicked...");
 
@@ -44,8 +44,8 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     this->pub_.publish(msg);
   }
 
-  if (cvui::button(frame, ((width / 3) + 10), (320 + 10), ((width / 3) - 20),
-                   100, "Stop")) {
+  if (cvui::button(frame, ((width / 3) + 10), (260 + 20), ((width / 3) - 20),
+                   50, "Stop")) {
     ROS_INFO("Button Stop clicked...");
 
     geometry_msgs::Twist msg;
@@ -56,8 +56,8 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     this->pub_.publish(msg);
   }
 
-  if (cvui::button(frame, (((width / 3) * 2) + 10), (320 + 10),
-                   ((width / 3) - 20), 100, "Right")) {
+  if (cvui::button(frame, (((width / 3) * 2) + 10), (260 + 20),
+                   ((width / 3) - 20), 50, "Right")) {
     ROS_INFO("Button Right clicked...");
 
     geometry_msgs::Twist msg;
@@ -68,8 +68,8 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     this->pub_.publish(msg);
   }
 
-  if (cvui::button(frame, ((width / 3) + 10), (420 + 30), ((width / 3) - 20),
-                   100, "Backward")) {
+  if (cvui::button(frame, ((width / 3) + 10), (330 + 20), ((width / 3) - 20),
+                   50, "Backward")) {
     ROS_INFO("Button Backward clicked...");
 
     geometry_msgs::Twist msg;
