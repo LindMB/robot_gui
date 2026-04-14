@@ -30,8 +30,8 @@ void CVUIROSGeneralInfoArea::msgCallback(
 
 void CVUIROSGeneralInfoArea::draw(cv::Mat &frame, const int &width) {
 
-  // Create window at (20 x-axis, 10 y-axis) with size (width - 40) x9100
-  // height) and title
+  // Create window in frame at (20 x-axis, 10 y-axis) with size (width - 40)
+  // x190 height) and title
   cvui::window(frame, 20, 10, (width - 20 * 2), 190, "General Information");
 
   // Show general robot information inside the window.

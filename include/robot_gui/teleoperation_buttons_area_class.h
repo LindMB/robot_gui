@@ -1,6 +1,7 @@
 #pragma once
 
 #include "robot_gui/cvui.h"
+#include <geometry_msgs/Twist.h>
 #include <opencv2/opencv.hpp>
 #include <ros/ros.h>
 
@@ -15,8 +16,12 @@ public:
 
 private:
   ros::Publisher pub_;
+  ros::Subscriber sub_;
+
   const double linear_x_step = 0.2;
   const double angular_z_step = 0.2;
   double current_linear_x;
   double current_angular_z;
+
+  void cmd_vel_callback(const geometry_msgs::Twist::ConstPtr &msg);
 };

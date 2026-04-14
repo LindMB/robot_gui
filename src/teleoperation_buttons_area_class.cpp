@@ -1,5 +1,4 @@
 #include "robot_gui/teleoperation_buttons_area_class.h"
-#include <geometry_msgs/Twist.h>
 #include <ros/ros.h>
 
 CVUIROSTeleopButtonsArea::CVUIROSTeleopButtonsArea(ros::NodeHandle *nh) {
@@ -8,6 +7,15 @@ CVUIROSTeleopButtonsArea::CVUIROSTeleopButtonsArea(ros::NodeHandle *nh) {
   this->current_angular_z = 0.0;
 
   this->pub_ = nh->advertise<geometry_msgs::Twist>("/cooper_1/cmd_vel", 10);
+  this->sub_ = nh->subscribe<geometry_msgs::Twist>(
+      "/cooper_1/cmd_vel", 20, &CVUIROSTeleopButtonsArea::cmd_vel_callback,
+      this);
+}
+
+void CVUIROSTeleopButtonsArea::cmd_vel_callback(
+    const geometry_msgs::Twist::ConstPtr &msg) {
+  this->current_linear_x = msg->linear.x;
+  this->current_angular_z = msg->angular.z;
 }
 
 void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
@@ -21,13 +29,7 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     msg.linear.x = this->current_linear_x;
     msg.angular.z = this->current_angular_z + angular_z_step;
 
-    this->current_linear_x = msg.linear.x;
-    this->current_angular_z = msg.angular.z;
-
     this->pub_.publish(msg);
-
-    ROS_INFO("Linear X: %f - Angular Z: %f", this->current_linear_x,
-             this->current_angular_z);
   }
 
   if (cvui::button(frame, ((width / 3) + 10), 210, ((width / 3) - 20), 100,
@@ -39,13 +41,7 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     msg.linear.x = this->current_linear_x + linear_x_step;
     msg.angular.z = this->current_angular_z;
 
-    this->current_linear_x = msg.linear.x;
-    this->current_angular_z = msg.angular.z;
-
     this->pub_.publish(msg);
-
-    ROS_INFO("Linear X: %f - Angular Z: %f", this->current_linear_x,
-             this->current_angular_z);
   }
 
   if (cvui::button(frame, ((width / 3) + 10), (320 + 10), ((width / 3) - 20),
@@ -57,13 +53,7 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     msg.linear.x = 0.0;
     msg.angular.z = 0.0;
 
-    this->current_linear_x = msg.linear.x;
-    this->current_angular_z = msg.angular.z;
-
     this->pub_.publish(msg);
-
-    ROS_INFO("Linear X: %f - Angular Z: %f", this->current_linear_x,
-             this->current_angular_z);
   }
 
   if (cvui::button(frame, (((width / 3) * 2) + 10), (320 + 10),
@@ -75,13 +65,7 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     msg.linear.x = this->current_linear_x;
     msg.angular.z = this->current_angular_z - angular_z_step;
 
-    this->current_linear_x = msg.linear.x;
-    this->current_angular_z = msg.angular.z;
-
     this->pub_.publish(msg);
-
-    ROS_INFO("Linear X: %f - Angular Z: %f", this->current_linear_x,
-             this->current_angular_z);
   }
 
   if (cvui::button(frame, ((width / 3) + 10), (420 + 30), ((width / 3) - 20),
@@ -93,12 +77,25 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     msg.linear.x = this->current_linear_x - linear_x_step;
     msg.angular.z = this->current_angular_z;
 
-    this->current_linear_x = msg.linear.x;
-    this->current_angular_z = msg.angular.z;
-
     this->pub_.publish(msg);
-
-    ROS_INFO("Linear X: %f - Angular Z: %f", this->current_linear_x,
-             this->current_angular_z);
   }
+
+  // Linear Velocity Window
+  // cvui::window(frame, x, y, width, height, "Text");
+  cvui::window(frame, 10, 570, (width / 2 - 20), 50, "Linear Velocity");
+
+  // Show linear velocity inside the window.
+  cvui::printf(
+      frame, 30, 595, 0.6, 0xff0000,
+      ((std::to_string(this->current_linear_x).substr(0, 4) + " m/s").c_str()));
+
+  // Angular Velocity Window
+  cvui::window(frame, (width / 2), 570, (width / 2 - 20), 50,
+               "Angular Velocity");
+
+  // Show angular velocity inside the window.
+  cvui::printf(
+      frame, (width / 2 + 20), 595, 0.6, 0xff0000,
+      ((std::to_string(this->current_angular_z).substr(0, 4) + " rad/s")
+           .c_str()));
 }
