@@ -17,6 +17,7 @@ public:
   ~CVUIROSRobotPositionArea() = default;
 
 private:
+  ros::Publisher pub_;
   ros::Subscriber sub_;
   std::string x_pos;
   std::string y_pos;

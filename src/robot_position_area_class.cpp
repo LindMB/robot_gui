@@ -1,18 +1,22 @@
 #include "robot_gui/robot_position_area_class.h"
+#include "geometry_msgs/Twist.h"
 #include "robot_gui/utils.h"
 
 CVUIROSRobotPositionArea::CVUIROSRobotPositionArea(ros::NodeHandle *nh) {
 
   this->x_pos = "";
-  this->z_pos = "";
+  this->y_pos = "";
   this->z_pos = "";
 
+  this->pub_ = nh->advertise<nav_msgs::Odometry>("/odom", 10);
   this->sub_ = nh->subscribe<nav_msgs::Odometry>(
       "/cooper_1/odom", 20, &CVUIROSRobotPositionArea::odom_callback, this);
 }
 
 void CVUIROSRobotPositionArea::odom_callback(
     const nav_msgs::Odometry::ConstPtr &msg) {
+
+  this->pub_.publish(*msg);
 
   this->x_pos = Utils::double_to_string_n_deci(msg->pose.pose.position.x, 2);
   this->y_pos = Utils::double_to_string_n_deci(msg->pose.pose.position.y, 2);
