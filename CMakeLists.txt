@@ -145,6 +145,9 @@ add_library(teleoperation_buttons_area
 add_library(robot_position_area
 	src/robot_position_area_class.cpp
 )
+add_library(distance_tracker_area
+	src/distance_tracker_area_class.cpp
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -193,11 +196,18 @@ target_link_libraries(robot_position_area
   ${OpenCV_LIBRARIES}
 )
 
+target_link_libraries(distance_tracker_area
+	cvui
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+)
+
 target_link_libraries(${PROJECT_NAME}_node
   main_window
   general_info_area
   teleoperation_buttons_area
   robot_position_area
+  distance_tracker_area
   ${catkin_LIBRARIES}
   ${OpenCV_LIBRARIES}
 )

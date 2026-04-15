@@ -1,7 +1,8 @@
 #include "robot_gui/main_window_class.h"
 
 CVUIROSMainWindow::CVUIROSMainWindow(ros::NodeHandle *nh)
-    : general_info_area(nh), teleop_buttons_area(nh), robot_position_area(nh) {
+    : general_info_area(nh), teleop_buttons_area(nh), robot_position_area(nh),
+      distance_tracker_area(nh) {
 
   // Init a OpenCV window and tell cvui to use it.
   cv::namedWindow(this->WINDOW_NAME);
@@ -24,6 +25,8 @@ void CVUIROSMainWindow::run() {
     this->teleop_buttons_area.draw(frame, this->width);
     // Draw the robot position area
     this->robot_position_area.draw(frame, this->width);
+    // Draw the distance tracker area
+    this->distance_tracker_area.draw(frame, this->width);
 
     // Update cvui internal stuff
     cvui::update();
