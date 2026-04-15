@@ -26,6 +26,8 @@ private:
   std::string data_field_06;
   std::string data_field_07;
   std::string data_field_08;
+  std::string data_field_09;
+  std::string data_field_10;
 
   void msgCallback(const robotinfo_msgs::RobotInfo10Fields::ConstPtr &msg);
 };

@@ -10,6 +10,8 @@ CVUIROSGeneralInfoArea::CVUIROSGeneralInfoArea(ros::NodeHandle *nh) {
   this->data_field_06 = "";
   this->data_field_07 = "";
   this->data_field_08 = "";
+  this->data_field_09 = "";
+  this->data_field_10 = "";
 
   this->sub_ = nh->subscribe<robotinfo_msgs::RobotInfo10Fields>(
       "robot_info", 5, &CVUIROSGeneralInfoArea::msgCallback, this);
@@ -26,13 +28,15 @@ void CVUIROSGeneralInfoArea::msgCallback(
   this->data_field_06 = msg->data_field_06;
   this->data_field_07 = msg->data_field_07;
   this->data_field_08 = msg->data_field_08;
+  this->data_field_09 = msg->data_field_09;
+  this->data_field_10 = msg->data_field_10;
 }
 
 void CVUIROSGeneralInfoArea::draw(cv::Mat &frame, const int &width) {
 
   // Create window in frame at (20 x-axis, 10 y-axis) with size (width - 40)
   // x190 height) and title
-  cvui::window(frame, 20, 10, (width - 20 * 2), 190, "General Information");
+  cvui::window(frame, 20, 10, (width - 20 * 2), 220, "General Information");
 
   // Show general robot information inside the window.
   cvui::printf(frame, 30, 35, 0.4, 0xffffff, this->data_field_01.c_str());
@@ -43,4 +47,6 @@ void CVUIROSGeneralInfoArea::draw(cv::Mat &frame, const int &width) {
   cvui::printf(frame, 30, 135, 0.4, 0xffffff, this->data_field_06.c_str());
   cvui::printf(frame, 30, 155, 0.4, 0xffffff, this->data_field_07.c_str());
   cvui::printf(frame, 30, 175, 0.4, 0xffffff, this->data_field_08.c_str());
+  cvui::printf(frame, 30, 195, 0.4, 0xffffff, this->data_field_09.c_str());
+  cvui::printf(frame, 30, 215, 0.4, 0xffffff, this->data_field_10.c_str());
 }

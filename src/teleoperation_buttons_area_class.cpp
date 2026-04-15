@@ -21,18 +21,8 @@ void CVUIROSTeleopButtonsArea::cmd_vel_callback(
 void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
 
   // cvui::button(frame, x, y, largeur, hauteur, "Texte")
-  if (cvui::button(frame, 10, (260 + 20), ((width / 3) - 20), 50, "Left")) {
-    ROS_INFO("Button Left clicked...");
 
-    geometry_msgs::Twist msg;
-
-    msg.linear.x = this->current_linear_x;
-    msg.angular.z = this->current_angular_z + angular_z_step;
-
-    this->pub_.publish(msg);
-  }
-
-  if (cvui::button(frame, ((width / 3) + 10), 210, ((width / 3) - 20), 50,
+  if (cvui::button(frame, ((width / 3) + 10), 240, ((width / 3) - 20), 50,
                    "Forward")) {
     ROS_INFO("Button Forward clicked...");
 
@@ -44,7 +34,18 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     this->pub_.publish(msg);
   }
 
-  if (cvui::button(frame, ((width / 3) + 10), (260 + 20), ((width / 3) - 20),
+  if (cvui::button(frame, 10, (300 + 10), ((width / 3) - 20), 50, "Left")) {
+    ROS_INFO("Button Left clicked...");
+
+    geometry_msgs::Twist msg;
+
+    msg.linear.x = this->current_linear_x;
+    msg.angular.z = this->current_angular_z + angular_z_step;
+
+    this->pub_.publish(msg);
+  }
+
+  if (cvui::button(frame, ((width / 3) + 10), (300 + 10), ((width / 3) - 20),
                    50, "Stop")) {
     ROS_INFO("Button Stop clicked...");
 
@@ -56,7 +57,7 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     this->pub_.publish(msg);
   }
 
-  if (cvui::button(frame, (((width / 3) * 2) + 10), (260 + 20),
+  if (cvui::button(frame, (((width / 3) * 2) + 10), (300 + 10),
                    ((width / 3) - 20), 50, "Right")) {
     ROS_INFO("Button Right clicked...");
 
@@ -68,7 +69,7 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
     this->pub_.publish(msg);
   }
 
-  if (cvui::button(frame, ((width / 3) + 10), (330 + 20), ((width / 3) - 20),
+  if (cvui::button(frame, ((width / 3) + 10), (370 + 10), ((width / 3) - 20),
                    50, "Backward")) {
     ROS_INFO("Button Backward clicked...");
 
@@ -82,21 +83,21 @@ void CVUIROSTeleopButtonsArea::draw(cv::Mat &frame, const int &width) {
 
   // Linear Velocity Window
   // cvui::window(frame, x, y, width, height, "Text");
-  cvui::window(frame, 10, 420, (width / 2 - 20), 50, "Linear Velocity");
+  cvui::window(frame, 10, 440, (width / 2 - 20), 50, "Linear Velocity");
 
   // Show linear velocity inside the window.
   cvui::printf(
-      frame, 30, 445, 0.6, 0xff0000,
+      frame, 30, 465, 0.6, 0xff0000,
       (Utils::double_to_string_n_deci(this->current_linear_x, 2) + " m/s")
           .c_str());
 
   // Angular Velocity Window
-  cvui::window(frame, (width / 2), 420, (width / 2 - 20), 50,
+  cvui::window(frame, (width / 2), 440, (width / 2 - 20), 50,
                "Angular Velocity");
 
   // Show angular velocity inside the window.
   cvui::printf(
-      frame, (width / 2 + 20), 445, 0.6, 0xff0000,
+      frame, (width / 2 + 20), 465, 0.6, 0xff0000,
       (Utils::double_to_string_n_deci(this->current_angular_z, 2) + " rad/s")
           .c_str());
 }
