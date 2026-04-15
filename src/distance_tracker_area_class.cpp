@@ -1,5 +1,4 @@
 #include "robot_gui/distance_tracker_area_class.h"
-#include "ros/message_forward.h"
 #include "std_srvs/Empty.h"
 #include "std_srvs/Trigger.h"
 
@@ -33,8 +32,13 @@ void CVUIROSDistanceTrackerArea::draw(cv::Mat &frame, const int &width) {
       if (this->get_distance_srv_client.call(trigger_srv_msg)) {
         ROS_INFO("Service called successfully");
 
-        this->distance = trigger_srv_msg.response.message;
-        ROS_INFO("Distance travelled (m): %s", this->distance.c_str());
+        if (trigger_srv_msg.response.success) {
+          this->distance = trigger_srv_msg.response.message;
+          ROS_INFO("Distance travelled (m): %s", this->distance.c_str());
+
+        } else {
+          ROS_WARN("Service responded with success = false");
+        }
 
       } else {
         ROS_ERROR("Failed to call service");
